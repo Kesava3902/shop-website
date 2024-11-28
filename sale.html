@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KP Store</title>
+    <style>
+        #top {
+            color: rgb(255, 127, 227);
+            font-size: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        Welcome to KP store
+    </div>
+    <form id="dataForm">
+        <label for="sale">Enter sale amount:</label>
+        <input id="sale" required>
+        <br>
+        <br>
+
+        <button type="button" onclick="addRow()">Add to Table</button>
+    </form>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>sale</th>
+                <th>time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic rows will be added here -->
+        </tbody>
+    </table>
+
+    <script>
+        function addRow() {
+            // Get form inputs
+            const sale = document.getElementById('sale').value;
+
+            if (sale) {
+                // Get table body
+                const tableBody = document.getElementById('dataTable').querySelector('tbody');
+                // Create a new Date object
+                const now = new Date();
+
+                // Get the current date and time
+                const currentDate = now.toLocaleDateString(); // Format: MM/DD/YYYY (default in US locale)
+                const currentTime = now.toLocaleTimeString(); // Format: HH:MM:SS AM/PM (default in US locale)
+                const date_and_time = currentDate + " " + currentTime
+
+
+                // Create a new row
+                const newRow = tableBody.insertRow();
+
+                // Insert cells into the row
+                const saleCell = newRow.insertCell(0);
+                const timeCell = newRow.insertCell(1)
+
+
+                // Set cell content
+
+                saleCell.textContent = sale;
+                timeCell.textContent = date_and_time
+                // Clear the form
+                document.getElementById('dataForm').reset();
+            } else {
+                alert('Please fill out all fields!');
+            }
+        }
+    </script>
+</body>
+
+</html>
